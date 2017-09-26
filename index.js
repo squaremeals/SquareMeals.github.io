@@ -33,6 +33,8 @@ var sessionStore = new MongoSessionStore({
 	url: credentials.mongo.development.connectionString
 });
 
+var EmailSignup = require('./models/EmailSignup.js');
+
 // Used for sessions
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('express-session')({
@@ -57,11 +59,42 @@ app.get('/', function(req, res) {
 	return res.render('home');
 });
 
+app.post('/', function(req, res) {
+
+	const emailAddress = req.body.emailAddress;
+
+	if (!emailAddress) {
+		return res.redirect(303, '/');
+	}
+
+	const emailSignup = new EmailSignup({
+		emailAddress: emailAddress,
+	})
+
+	emailSignup.save(function(error, emailSignup) {
+
+		if (error || !emailSignup) {
+			console.log(error);
+			return res.redirect(303, '/');
+		}
+
+		console.log(`Email Address ${emailAddress} signed up.`);
+		return res.redirect(303, '/thank-you');
+	});
+
+});
+
+app.get('/thank-you', function(req, res) {
+	return res.render('thank-you');
+});
+
+
 // custom 404 page
 app.use(function(req, res) {
     res.status(404);
     res.render('404');
 });
+
 
 // custom 500 page
 app.use(function(err, req, res, next) {
