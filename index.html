@@ -1,0 +1,91 @@
+<HTML>
+	<head>
+		<title> Square Meals </title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link href="img/icon.png" rel="icon" type="image/png">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			// Smooth scroll  
+			$(document).ready(function(){
+				// Select all links with hashes
+				$('a[href*="#"]')
+				  // Remove links that don't actually link to anything
+				  .not('[href="#"]')
+				  .not('[href="#0"]')
+				  .click(function(event) {
+				    // On-page links
+				    if (
+				      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+				      && 
+				      location.hostname == this.hostname
+				    ) {
+				      // Figure out element to scroll to
+				      var target = $(this.hash);
+				      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				      // Does a scroll target exist?
+				      if (target.length) {
+				        // Only prevent default if animation is actually gonna happen
+				        event.preventDefault();
+				        $('html, body').animate({
+				          scrollTop: target.offset().top
+				        }, 1000, function() {
+				          // Callback after animation
+				          // Must change focus!
+				          var $target = $(target);
+				          $target.focus();
+				          if ($target.is(":focus")) { // Checking if the target was focused
+				            return false;
+				          } else {
+				            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+				            $target.focus(); // Set focus again
+				          };
+				        });
+				      }
+				    }
+				  });
+				 });
+		</script>
+		</head>
+
+	<body>
+		<section id="header">
+			<img src="img/top-rectangles.png" id="top-rectangles">
+			<h1> Square<span class="bold">Meals </h1>
+			<a href="#notified"><div class="button"> Sign Up </div></a>
+			</nav>
+			<h2> Track your progress.<br>
+			Achieve your goals. </h2>
+			<p> Nutrition doesn’t need to be a chore. SquareMeals makes tracking key nutrition information easy, to help you achieve your goals. Learn what to eat and how to power your life through nutrition. </p>
+			<img src="img/mockup.png" id="mockup">
+			<img src="img/bottom-rectangle.png" id="bottom-rectangle">
+		</section>
+
+		<section id="notified">
+			<h2> Get notified when we launch. </h2>
+			<form action="https://formspree.io/squaremealsio@gmail.com" method="POST">
+    			<input type="email" name="_replyto" id="email" placeholder="Email Address">
+    			<input type="submit" value="Submit" id="submit">
+			</form>
+		</section>
+
+		<footer>
+			<div class="footer-third" style="margin-left: 263px">
+				<h4> Social </h4>
+				<h5> <a href="#">Instagram</a> </h5> 
+				<h5> <a href="#">Facebook</a></h5> 
+			</div>
+
+			<div class="footer-third">
+				<h4> Legal </h4>
+				<h5> <a href="https://github.com/squaremeals/launchpage/blob/master/Terms%20of%20Use.md">Terms of Use</a></h5> 
+				<h5> <a href="https://github.com/squaremeals/launchpage/blob/master/PrivacyPolicy.md">Privacy Policy</a></h5> 
+			</div>
+
+			<div class="footer-third">
+				<h4> Contact </h4>
+				<h5> <a href="#">Support</a></h5> 
+				<h5> <a href="#">FAQ</a></h5> 
+			</div>	
+		</footer>
+	</body>
+</HTML>
