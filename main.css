@@ -26,6 +26,10 @@
             user-select: none; /* Non-prefixed version, currently */
 }
 
+*:focus {
+    outline: none;
+}
+
 #header{
 	background-color: #F6F7F9;
 	height: 100vh;
